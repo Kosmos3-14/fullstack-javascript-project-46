@@ -8,7 +8,14 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx jest"
+    "test": "npx jest",
+    "test-coverage": "npm run test -- --coverage --coverageReporters=text-lcov | npx codeclimate-test-reporter"
+  },
+  "codeclimate": {
+    "test_reporter": {
+      "type": "lcov",
+      "path": "coverage/lcov.info"
+    }
   },
   "repository": {
     "type": "git",
