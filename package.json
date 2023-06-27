@@ -10,18 +10,6 @@
   "scripts": {
     "test": "npx jest"
   },
-  "jest": {
-    "reporters": [
-      "default",
-      [
-        "jest-junit",
-        {
-          "outputDirectory": "coverage",
-          "outputName": "junit.xml"
-        }
-      ]
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kosmos3-14/fullstack-javascript-project-46.git"
