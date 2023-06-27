@@ -11,4 +11,4 @@ test:
 	npm test
 
 test-coverage:
-	npm run test -- --coverage --coverageReporters=text-lcov && mv ./coverage/lcov.info ./lcov.info && npx codeclimate-test-reporter < ./lcov.info
+	npm test -- --coverage --coverageProvider=v8
