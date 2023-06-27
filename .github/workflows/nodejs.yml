@@ -25,12 +25,13 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Upload coverage to Codeclimate
+    - name: Test & publish code coverage
+      # Publish code coverage on Code Climate
+      # https://github.com/paambaati/codeclimate-action
+      uses: paambaati/codeclimate-action@v2.6.0
+      # Add Code Climate secret key
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
-        npm run test:coverage
-        ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+      with:
+        coverageCommand: make test-coverage
+        debug: true
