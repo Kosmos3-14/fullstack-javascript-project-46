@@ -8,14 +8,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx jest",
-    "test-coverage": "npm run test -- --coverage --coverageReporters=text-lcov | npx codeclimate-test-reporter"
-  },
-  "codeclimate": {
-    "test_reporter": {
-      "type": "lcov",
-      "path": "coverage/lcov.info"
-    }
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -29,6 +22,7 @@
   "homepage": "https://github.com/Kosmos3-14/fullstack-javascript-project-46#readme",
   "dependencies": {
     "commander": "^10.0.1",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
