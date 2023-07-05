@@ -3,7 +3,7 @@
 import path from 'path';
 import genDiff from '../src/genDiff.js';
 
-const getFixturePath = (filename) => path.join(path.dirname(new URL(import.meta.url).pathname), '__fixtures__', filename);
+const getFixturePath = (filename) => path.join(process.cwd(), '__fixtures__', filename);
 
 test('compare flat JSON files', () => {
   const file1Path = getFixturePath('file1.json');
