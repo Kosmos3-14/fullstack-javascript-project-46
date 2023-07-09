@@ -1,54 +1,52 @@
 import _ from 'lodash';
-import path from 'path';
-import fs from 'fs';
 import parse from './parsers.js';
 
 const genDiff = (filepath1, filepath2) => {
-  const data1 = fs.readFileSync(filepath1, 'utf-8');
-  const data2 = fs.readFileSync(filepath2, 'utf-8');
-  const ext1 = path.extname(filepath1);
-  const ext2 = path.extname(filepath2);
-  let obj1;
-  let obj2;
+  const object1 = parse(filepath1);
+  const object2 = parse(filepath2);
 
-  switch (ext1) {
-    case '.json':
-      obj1 = JSON.parse(data1);
-      break;
-    case '.yml':
-    case '.yaml':
-      obj1 = parse(filepath1);
-      break;
-    default:
-      throw new Error(`Unknown file extension: ${ext1}`);
-  }
-
-  switch (ext2) {
-    case '.json':
-      obj2 = JSON.parse(data2);
-      break;
-    case '.yml':
-    case '.yaml':
-      obj2 = parse(filepath2);
-      break;
-    default:
-      throw new Error(`Unknown file extension: ${ext2}`);
-  }
-
-  const keys = _.union(_.keys(obj1), _.keys(obj2)).sort();
-  const diff = keys.map((key) => {
-    if (!_.has(obj1, key)) {
-      return `  + ${key}: ${obj2[key]}`;
-    }
-    if (!_.has(obj2, key)) {
-      return `  - ${key}: ${obj1[key]}`;
-    }
-    if (_.isEqual(obj1[key], obj2[key])) {
-      return `    ${key}: ${obj1[key]}`;
-    }
-    return [`  - ${key}: ${obj1[key]}`, `  + ${key}: ${obj2[key]}`];
-  });
-  return `{\n${_.flatten(diff).join('\n')}\n}`;
+  const buildDiffTree = (obj1, obj2) => {
+    const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+    return keys.map((key) => {
+      const value1 = obj1[key];
+      const value2 = obj2[key];
+      if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+        return {
+          key,
+          type: 'nested',
+          children: buildDiffTree(value1, value2),
+        };
+      }
+      if (_.has(obj1, key) && !_.has(obj2, key)) {
+        return {
+          key,
+          type: 'removed',
+          value: value1,
+        };
+      }
+      if (!_.has(obj1, key) && _.has(obj2, key)) {
+        return {
+          key,
+          type: 'added',
+          value: value2,
+        };
+      }
+      if (!_.isEqual(value1, value2)) {
+        return {
+          key,
+          type: 'changed',
+          oldValue: value1,
+          value: value2,
+        };
+      }
+      return {
+        key,
+        type: 'unchanged',
+        value: value1,
+      };
+    });
+  };
+  return buildDiffTree(object1, object2);
 };
 
 export default genDiff;
