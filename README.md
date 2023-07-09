@@ -9,3 +9,7 @@
 ### Demonstration of .json files comparison:
 
 [![asciicast](https://asciinema.org/a/RIzEF3edSFSUetjwc7V4g22gQ.svg)](https://asciinema.org/a/RIzEF3edSFSUetjwc7V4g22gQ)
+
+### Demonstration of nested json and yaml files comparison:
+
+[![asciicast](https://asciinema.org/a/fraTyt9y0PWvcfjOMb85tFMii.svg)](https://asciinema.org/a/fraTyt9y0PWvcfjOMb85tFMii)

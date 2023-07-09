@@ -8,7 +8,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx jest --watch"
+    "test": "npx jest --watchAll"
   },
   "repository": {
     "type": "git",
