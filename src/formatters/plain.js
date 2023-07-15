@@ -1,4 +1,15 @@
-import formatValue from './formatValue.js';
+const formatValue = (value) => {
+  if (value === null) {
+    return 'null';
+  }
+  if (typeof value === 'object') {
+    return '[complex value]';
+  }
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
+  return value;
+};
 
 const formatPlain = (diffTree, parentKey = '') => {
   const lines = diffTree.flatMap((node) => {
