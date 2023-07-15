@@ -1,3 +1,5 @@
+## gendiff utility
+
 ### Hexlet tests and linter status:
 
 [![Actions Status](https://github.com/Kosmos3-14/fullstack-javascript-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Kosmos3-14/fullstack-javascript-project-46/actions)
@@ -6,10 +8,34 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/182b9efb5bb684067e88/maintainability)](https://codeclimate.com/github/Kosmos3-14/fullstack-javascript-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/182b9efb5bb684067e88/test_coverage)](https://codeclimate.com/github/Kosmos3-14/fullstack-javascript-project-46/test_coverage)
 
-### Demonstration of .json files comparison:
+### Usage:
 
-[![asciicast](https://asciinema.org/a/RIzEF3edSFSUetjwc7V4g22gQ.svg)](https://asciinema.org/a/RIzEF3edSFSUetjwc7V4g22gQ)
+Difference Calculator is a program that determines the difference between two data structures.
+Utility features:
+- Support for different input formats: yaml, json.
+- Report generation in plain text, stylish and json.
 
-### Demonstration of nested json and yaml files comparison:
+### system requirements:
 
-[![asciicast](https://asciinema.org/a/fraTyt9y0PWvcfjOMb85tFMii.svg)](https://asciinema.org/a/fraTyt9y0PWvcfjOMb85tFMii)
+Node.js, npm package manager.
+
+### Setup:
+
+Use 'git clone' command, to copy the repository to your local computer.
+
+```bash
+make install
+```
+```bash
+npm link
+```
+
+To globally install a package, use the 'npm link' command. It should be run from the root directory of the package. The 'npm link' command may require starting with sudo.
+
+### Demonstration of nested json and yaml files comparison with stylish output format:
+
+[![asciicast](https://asciinema.org/a/5ldHJJ9EvDzOlZfGsebRdJ77q.svg)](https://asciinema.org/a/5ldHJJ9EvDzOlZfGsebRdJ77q)
+
+### Demonstration of nested json and yaml files comparison with plain output format:
+
+[![asciicast](https://asciinema.org/a/t4PhDhlCsZ1znsq10OMfFE3Lh.svg)](https://asciinema.org/a/t4PhDhlCsZ1znsq10OMfFE3Lh)
