@@ -3,45 +3,41 @@ import parse from './parsers.js';
 import format from './formatters/index.js';
 
 const buildDiffTree = (data1, data2) => {
-  const keys = _.union(Object.keys(data1), Object.keys(data2)).slice().sort();
-  const diffTree = keys.map((key) => {
+  const keys = _.union(Object.keys(data1), Object.keys(data2));
+  const diffTree = keys.reduce((acc, key) => {
     const value1 = data1[key];
     const value2 = data2[key];
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      return {
+      return [...acc, {
         key,
         type: 'nested',
         children: buildDiffTree(value1, value2),
-      };
+      }];
     }
     if (!_.has(data1, key)) {
-      return {
+      return [...acc, {
         key,
         type: 'added',
         value: value2,
-      };
+      }];
     }
     if (!_.has(data2, key)) {
-      return {
+      return [...acc, {
         key,
         type: 'removed',
         value: value1,
-      };
+      }];
     }
     if (!_.isEqual(value1, value2)) {
-      return {
+      return [...acc, {
         key,
-        type: 'changed',
+        type: 'updated',
         oldValue: value1,
-        value: value2,
-      };
+        newValue: value2,
+      }];
     }
-    return {
-      key,
-      type: 'unchanged',
-      value: value1,
-    };
-  });
+    return acc;
+  }, []);
   return diffTree;
 };
 
