@@ -22,8 +22,8 @@ Property 'group3' was added with value: [complex value]`;
 });
 
 test('compare nested yaml files with plain output', () => {
-  const file1Path = getFixturePath('filepath1.yml');
-  const file2Path = getFixturePath('filepath2.yml');
+  const file1Path = getFixturePath('file1.yml');
+  const file2Path = getFixturePath('file2.yml');
   const expected = `Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From true to null

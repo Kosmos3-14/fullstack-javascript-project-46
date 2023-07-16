@@ -55,8 +55,8 @@ test('compare nested JSON files with stylish output', () => {
 });
 
 test('compare nested yaml files with stylish output', () => {
-  const file1Path = getFixturePath('filepath1.yml');
-  const file2Path = getFixturePath('filepath2.yml');
+  const file1Path = getFixturePath('file1.yml');
+  const file2Path = getFixturePath('file2.yml');
   const expected = `{
     common: {
       + follow: false
