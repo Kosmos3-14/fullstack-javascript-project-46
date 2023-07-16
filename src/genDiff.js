@@ -3,7 +3,7 @@ import parse from './parsers.js';
 import format from './formatters/index.js';
 
 const buildDiffTree = (data1, data2) => {
-  const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();
+  const keys = _.union(Object.keys(data1), Object.keys(data2)).slice().sort();
   const diffTree = keys.map((key) => {
     const value1 = data1[key];
     const value2 = data2[key];
