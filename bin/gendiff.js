@@ -10,9 +10,7 @@ program
   .usage('[options] <filepath1> <filepath2>')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format', 'stylish')
-  .action((filename1, filename2) => {
-    const filepath1 = path.join(process.cwd(), filename1);
-    const filepath2 = path.join(process.cwd(), filename2);
+  .action((filepath1, filepath2) => {
     const options = program.opts();
     const diff = genDiff(filepath1, filepath2, options.format);
     console.log(diff);
