@@ -28,15 +28,19 @@ const buildDiffTree = (data1, data2) => {
         value: value1,
       }];
     }
-    if (!_.isEqual(value1, value2)) {
+    if (_.isEqual(value1, value2)) {
       return [...acc, {
         key,
-        type: 'updated',
-        oldValue: value1,
-        newValue: value2,
+        type: 'unchanged',
+        value: value1,
       }];
     }
-    return acc;
+    return [...acc, {
+      key,
+      type: 'changed',
+      oldValue: value1,
+      newValue: value2,
+    }];
   }, []);
   return diffTree;
 };
