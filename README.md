@@ -39,3 +39,7 @@ To globally install a package, use the 'npm link' command. It should be run from
 ### Demonstration of nested json and yaml files comparison with plain output format:
 
 [![asciicast](https://asciinema.org/a/t4PhDhlCsZ1znsq10OMfFE3Lh.svg)](https://asciinema.org/a/t4PhDhlCsZ1znsq10OMfFE3Lh)
+
+### Demonstration of nested json and yaml files comparison with json output format:
+
+[![asciicast](https://asciinema.org/a/wWGnbVEbXW9ZNVcmdcR0J3NO1.svg)](https://asciinema.org/a/wWGnbVEbXW9ZNVcmdcR0J3NO1)
