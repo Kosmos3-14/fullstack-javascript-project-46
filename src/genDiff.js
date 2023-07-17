@@ -3,10 +3,12 @@ import parse from './parsers.js';
 import format from './formatters/index.js';
 
 const buildDiffTree = (data1, data2) => {
-  const keys = _.union(Object.keys(data1), Object.keys(data2)).sort();
+  const newData1 = _.cloneDeep(data1);
+  const newData2 = _.cloneDeep(data2);
+  const keys = _.union(Object.keys(newData1), Object.keys(newData2)).sort();
   const diffTree = keys.map((key) => {
-    const value1 = data1[key];
-    const value2 = data2[key];
+    const value1 = newData1[key];
+    const value2 = newData2[key];
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return {
         key,
@@ -14,14 +16,14 @@ const buildDiffTree = (data1, data2) => {
         children: buildDiffTree(value1, value2),
       };
     }
-    if (!_.has(data1, key)) {
+    if (!_.has(newData1, key)) {
       return {
         key,
         type: 'added',
         value: value2,
       };
     }
-    if (!_.has(data2, key)) {
+    if (!_.has(newData2, key)) {
       return {
         key,
         type: 'removed',
