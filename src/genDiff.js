@@ -1,56 +1,19 @@
-import _ from 'lodash';
+import path from 'path';
+import fs from 'fs';
+import buildDiffTree from './buildDiffTree.js';
 import parse from './parsers.js';
 import format from './formatters/index.js';
 
-const buildDiffTree = (data1, data2) => {
-  const newData1 = _.cloneDeep(data1);
-  const newData2 = _.cloneDeep(data2);
-  const keys = _.union(Object.keys(newData1), Object.keys(newData2)).sort();
-  const diffTree = keys.map((key) => {
-    const value1 = newData1[key];
-    const value2 = newData2[key];
-    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      return {
-        key,
-        type: 'nested',
-        children: buildDiffTree(value1, value2),
-      };
-    }
-    if (!_.has(newData1, key)) {
-      return {
-        key,
-        type: 'added',
-        value: value2,
-      };
-    }
-    if (!_.has(newData2, key)) {
-      return {
-        key,
-        type: 'removed',
-        value: value1,
-      };
-    }
-    if (!_.isEqual(value1, value2)) {
-      return {
-        key,
-        type: 'changed',
-        oldValue: value1,
-        value: value2,
-      };
-    }
-    return {
-      key,
-      type: 'unchanged',
-      value: value1,
-    };
-  });
-  return diffTree;
-};
-
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
-  const object1 = parse(filepath1);
-  const object2 = parse(filepath2);
-  const diffTree = buildDiffTree(object1, object2);
+  const absolutePath1 = path.resolve(process.cwd(), filepath1);
+  const absolutePath2 = path.resolve(process.cwd(), filepath2);
+  const ext1 = path.extname(filepath1).slice(1);
+  const ext2 = path.extname(filepath2).slice(1);
+  const fileData1 = fs.readFileSync(absolutePath1, 'utf-8');
+  const fileData2 = fs.readFileSync(absolutePath2, 'utf-8');
+  const data1 = parse(fileData1, ext1);
+  const data2 = parse(fileData2, ext2);
+  const diffTree = buildDiffTree(data1, data2);
   return format(diffTree, formatName);
 };
 

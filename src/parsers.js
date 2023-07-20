@@ -1,18 +1,14 @@
 import yaml from 'js-yaml';
-import fs from 'fs';
-import path from 'path';
 
-const parse = (filepath) => {
-  const fileContent = fs.readFileSync(filepath, 'utf-8');
-  const extension = path.extname(filepath);
-  switch (extension) {
-    case '.json':
-      return JSON.parse(fileContent);
-    case '.yml':
-    case '.yaml':
-      return yaml.load(fileContent);
+const parse = (data, ext) => {
+  switch (ext) {
+    case 'json':
+      return JSON.parse(data);
+    case 'yml':
+    case 'yaml':
+      return yaml.load(data);
     default:
-      throw new Error(`Unknown file extension: ${extension}`);
+      throw new Error(`Invalid extention - ${ext}`);
   }
 };
 
